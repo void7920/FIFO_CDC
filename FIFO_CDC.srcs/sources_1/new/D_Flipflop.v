@@ -27,7 +27,7 @@ module D_Flipflop #(parameter addrsize = 8)(
     d
     );
     
-    output [addrsize:0]q;
+    output reg [addrsize:0]q;
     input clk;
     input rst_n;
     input [addrsize:0]d;
