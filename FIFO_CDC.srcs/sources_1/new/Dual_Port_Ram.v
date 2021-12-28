@@ -23,9 +23,9 @@
 module Dual_Port_Ram #(parameter MSB = 8, parameter addrsize = 8)(
     rd,
     clk,
-    wa,
-    rd,
+    wd,
     ra,
+    wa,
     we
     );
     
@@ -33,12 +33,12 @@ module Dual_Port_Ram #(parameter MSB = 8, parameter addrsize = 8)(
     
     output [MSB-1:0]rd;
     input clk;
-    input [addrsize-1:0]wa;
-    input [MSB-1:0]rd;
+    input [MSB-1:0]wd;
     input [addrsize-1:0]ra;
+    input [addrsize-1:0]wa;
     input we;
     
-    reg [MSB-1:0] ram [0:depth];
+    reg [MSB-1:0] ram [0:depth-1];
     
     assign rd = ram[ra];
     
