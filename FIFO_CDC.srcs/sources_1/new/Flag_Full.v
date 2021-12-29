@@ -28,7 +28,7 @@ module Flag_Full #(parameter addrsize = 8)(
     q2_ptr
     );
     
-    output full;
+    output reg full;
     input clk;
     input rst_n;
     input [addrsize:0]ptr;
@@ -43,7 +43,7 @@ module Flag_Full #(parameter addrsize = 8)(
         
         else
         begin
-            full <= (ptr == {~q2_ptr[depth:depth-1], q2_ptr[depth-2:0]});
+            full <= (ptr == {~q2_ptr[addrsize:addrsize-1], q2_ptr[addrsize-2:0]});
         end
     end
 endmodule
