@@ -123,4 +123,3 @@ module Tb_FIFO();
         end
     endtask
 endmodule
-

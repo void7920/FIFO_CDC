@@ -37,4 +37,3 @@ module Synchronizer #(parameter addrsize = 8) (
     D_Flipflop Sync0(.q(q1_ptr), .clk(clk), .rst_n(rst_n), .d(ptr));
     D_Flipflop Sync1(.q(q2_ptr), .clk(clk), .rst_n(rst_n), .d(q1_ptr));
 endmodule
-
