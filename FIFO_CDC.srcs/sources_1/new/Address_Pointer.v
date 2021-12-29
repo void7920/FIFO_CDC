@@ -36,9 +36,11 @@ module Address_Pointer #(parameter addrsize = 8)(
     input state;
     input c;
     
-    reg ptr_bin;
-    wire ptr_bin_next = ptr_bin + (~state & c);
-    wire ptr_gray_next = (ptr_bin_next >> 1) ^ ptr_bin_next;
+    reg [addrsize:0]ptr_bin;
+    wire [addrsize:0]ptr_bin_next = ptr_bin + (~state & c);
+    wire [addrsize:0]ptr_gray_next = (ptr_bin_next >> 1) ^ ptr_bin_next;
+    
+    assign addr = ptr_bin[addrsize-1:0];
     
     always@(posedge clk, negedge rst_n)
     begin
