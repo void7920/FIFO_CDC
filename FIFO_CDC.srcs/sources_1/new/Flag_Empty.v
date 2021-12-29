@@ -28,7 +28,7 @@ module Flag_Empty #(parameter addrsize = 8)(
     q2_ptr
     );
     
-    output empty;
+    output reg empty;
     input clk;
     input rst_n;
     input [addrsize:0]ptr;
