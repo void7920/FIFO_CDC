@@ -60,11 +60,20 @@ module FIFO #(parameter MSB = 8, parameter addrsize = 8)(
     
     assign wclken = ~full & winc;
     
+    // Dual Port Ram
     Dual_Port_Ram #(MSB, addrsize) ram(.rd(rdata), .clk(wclk), .wd(wdata), .ra(raddr), .wa(waddr), .we(wclken));
+    
+    // wptr & full logic
     Address_Pointer #(addrsize) Write_Pointer(.addr(waddr), .ptr(wptr), .clk(wclk), .rst_n(wrst_n), .state(full), .c(winc));
     Flag_Full #(addrsize) Full_Flag(.full(full), .clk(wclk), .rst_n(wrst_n), .ptr(wptr), .q2_ptr(wq2_rptr));
+    
+    // rptr & empty logic
     Address_Pointer #(addrsize) Read_Pointer(.addr(raddr), .ptr(rptr), .clk(rclk), .rst_n(rrst_n), .state(empty), .c(rinc));
     Flag_Empty #(addrsize) Empty_Flag(.empty(empty), .clk(rclk), .rst_n(rrst_n), .ptr(rptr), .q2_ptr(rq2_wptr));
+    
+    // wq2_rptr sync
     Synchronizer #(addrsize) sync_wq2(.q2_ptr(wq2_rptr), .clk(wclk), .rst_n(wrst_n), .ptr(rptr));
+    
+    // rq2_wptr sync
     Synchronizer #(addrsize) sync_rq2(.q2_ptr(rq2_wptr), .clk(rclk), .rst_n(rrst_n), .ptr(wptr));
 endmodule
